@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Pinnacle Consulting | Guiding Businesses to the Peak of Success</title>
     <meta name="description" content="Pinnacle Consulting helps businesses achieve sustainable growth through strategy, operations, HR, and innovation.">
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
        html, body{
@@ -35,12 +35,50 @@
             }
         }
     </script>
-    
+
     <style>
+        /* --- CUSTOM HAMBURGER ANIMATION --- */
+.hamburger-btn {
+    width: 20px;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 60;
+}
+
+.hamburger-line {
+    display: block;
+    height: 3px; /* Thinner */
+    width: 100%;
+    background-color: #0A2342; /* Deep Blue */
+    border-radius: 9999px; /* Rounder */
+    transition: all 0.3s ease-in-out;
+    transform-origin: left center;
+}
+
+/* Animation State: Open (X shape) */
+.hamburger-btn.open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(0px, -1px);
+    width: 24px;
+}
+
+.hamburger-btn.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    width: 0;
+}
+
+.hamburger-btn.open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(0px, 1px);
+    width: 24px;
+}
+        
         .hero-overlay {
             background: linear-gradient(135deg, rgba(10, 35, 66, 0.9) 0%, rgba(192, 192, 192, 0.3) 100%);
         }
-        
+
         /* Modal Transitions */
         #article-modal {
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -55,7 +93,7 @@
             visibility: visible;
             pointer-events: auto;
         }
-        
+
         /* Mobile Menu Transition */
         #mobile-menu-overlay {
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -85,25 +123,29 @@
                 </a>
             </div>
 
-            <button onclick="toggleMobileMenu()" class="md:hidden text-deepBlue text-2xl focus:outline-none">
-                <i id="menu-icon" class="fas fa-bars"></i>
-            </button>
+            <div class="md:hidden">
+    <div id="hamburger-btn" class="hamburger-btn" onclick="toggleMobileMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </div>
+</div>
         </div>
-
-        <div id="mobile-menu-overlay" class="absolute top-full left-0 w-full bg-gradient-to-b from-deepBlue to-gray-900 shadow-xl transform -translate-y-[150%] -z-10 pb-8 border-t border-gray-700">
-            <div class="flex flex-col items-start px-8 pt-6 space-y-5">
-                <a href="#home" onclick="toggleMobileMenu()" class="text-white text-lg font-medium font-sans hover:text-gold transition w-full border-b border-gray-700 pb-2">Home</a>
-                <a href="#about" onclick="toggleMobileMenu()" class="text-white text-lg font-medium font-sans hover:text-gold transition w-full border-b border-gray-700 pb-2">About Us</a>
-                <a href="#services" onclick="toggleMobileMenu()" class="text-white text-lg font-medium font-sans hover:text-gold transition w-full border-b border-gray-700 pb-2">Services</a>
-                <a href="#insights" onclick="toggleMobileMenu()" class="text-white text-lg font-medium font-sans hover:text-gold transition w-full border-b border-gray-700 pb-2">Insights</a>
-                <a href="#contact" onclick="toggleMobileMenu()" class="text-gold text-lg font-bold font-sans hover:text-white transition w-full pt-2">Book Consultation    </a>
-            </div>
-        </div>
+        
+        <div id="mobile-menu-overlay" class="absolute top-full left-0 w-full bg-white shadow-xl transform -translate-y-[150%] -z-10 pb-8 border-t border-gray-100">
+    <div class="flex flex-col items-start px-8 pt-6 space-y-5">
+        <a href="#home" onclick="toggleMobileMenu()" class="text-deepBlue text-lg font-medium font-sans hover:text-gold transition w-full border-b border-gray-100 pb-2">Home</a>
+        <a href="#about" onclick="toggleMobileMenu()" class="text-deepBlue text-lg font-medium font-sans hover:text-gold transition w-full border-b border-gray-100 pb-2">About Us</a>
+        <a href="#services" onclick="toggleMobileMenu()" class="text-deepBlue text-lg font-medium font-sans hover:text-gold transition w-full border-b border-gray-100 pb-2">Services</a>
+        <a href="#insights" onclick="toggleMobileMenu()" class="text-deepBlue text-lg font-medium font-sans hover:text-gold transition w-full border-b border-gray-100 pb-2">Insights</a>
+        <a href="#contact" onclick="toggleMobileMenu()" class="text-gold text-lg font-bold font-sans hover:text-deepBlue transition w-full pt-2">Book Consultation</a>
+    </div>
+</div>
     </nav>
 
     <header id="home" class="relative w-full h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('images/background.jpg');">
         <div class="absolute inset-0 hero-overlay"></div>
-        
+
         <div class="relative z-10 text-center px-6 max-w-4xl">
             <h1 class="text-5xl md:text-6xl font-heading font-extrabold text-white mb-4 leading-tight">
                 PINNACLE CONSULTING
@@ -124,30 +166,37 @@
 
     <section id="about" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="w-full md:w-1/2">
-                    <img src="images/about.jpg" alt="Professional consulting team working together" class="rounded-2xl shadow-2xl">
-                </div>
-                <div class="w-full md:w-1/2">
-                    <h2 class="text-4xl font-heading font-bold text-deepBlue mb-6">Who We Are</h2>
-                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                        At Pinnacle Consulting, we specialize in helping businesses unlock their potential and achieve sustainable growth. 
-                    </p>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                        Our mission is to guide organizations to the peak of success through tailored strategies, actionable insights, and long-term partnerships. We don't just advise; we partner with you to execute.
-                    </p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-gold mr-3"></i> Strategic Planning
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-gold mr-3"></i> Operational Excellence
-                        </li>
-                    </ul>
-                    <a href="#contact" class="text-deepBlue font-bold border-b-2 border-gold hover:text-gold transition">Meet The Team &rarr;</a>
-                </div>
-            </div>
+    
+    <div class="flex flex-col md:flex-row items-center gap-12 mb-8">
+        <div class="w-full md:w-1/2">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop" alt="Professional consulting team" class="rounded-2xl shadow-2xl w-full object-cover h-80 md:h-96">
         </div>
+        
+        <div class="w-full md:w-1/2">
+            <h2 class="text-4xl font-heading font-bold text-deepBlue mb-6">Who We Are</h2>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                At Pinnacle Consulting, we specialize in helping businesses unlock their potential and achieve sustainable growth. We believe that true success comes from a deep understanding of your unique challenges, combined with world-class strategy.
+            </p>
+        </div>
+    </div>
+
+    <div class="w-full">
+        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+            Our mission is to guide organizations to the peak of success through tailored strategies, actionable insights, and long-term partnerships. We don't just act as advisors who leave you with a presentation deck; we embed ourselves within your operations to ensure execution matches the vision. From navigating complex digital transformations to optimizing global supply chains, our team creates the structural resilience your business needs to thrive in an unpredictable market.
+        </p>
+        
+        <ul class="space-y-4 mb-8">
+            <li class="flex items-center text-gray-700">
+                <i class="fas fa-check-circle text-gold mr-3"></i> Strategic Planning & Execution
+            </li>
+            <li class="flex items-center text-gray-700">
+                <i class="fas fa-check-circle text-gold mr-3"></i> Operational Excellence Frameworks
+            </li>
+        </ul>
+        <a href="#contact" class="inline-block text-deepBlue font-bold border-b-2 border-gold hover:text-gold transition pb-1">Meet The Team &rarr;</a>
+    </div>
+    
+</div>
     </section>
 
     <section id="services" class="py-20 bg-lightGray">
@@ -185,7 +234,7 @@
                     <p class="text-gray-600">Driving innovation and scaling businesses sustainably in new and existing markets.</p>
                 </div>
             </div>
-            
+
             <div class="mt-12">
                 <a href="#contact" class="px-8 py-3 bg-deepBlue text-white font-bold rounded hover:bg-opacity-90 transition">
                     Discover How We Help
@@ -199,7 +248,7 @@
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-heading font-bold text-deepBlue">Insights That Matter</h2>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <article class="bg-white rounded-lg overflow-hidden shadow border border-gray-100 flex flex-col">
                     <img src="images/strategy1.jpg" alt="Business growth chart" class="w-full h-48 object-cover">
@@ -270,7 +319,7 @@
     <section class="py-20 bg-deepBlue text-white">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="text-4xl font-heading font-bold mb-12">Proven Results</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm border border-white border-opacity-20">
                     <div class="mb-4 text-gold text-lg">
@@ -369,7 +418,7 @@
     <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            
+
             <div class="col-span-1 md:col-span-1">
                 <h2 class="text-2xl font-heading font-bold mb-6">PINNACLE <span class="text-gold">.</span></h2>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">
@@ -462,13 +511,13 @@
 
             <div id="modal-content">
                 <img id="modal-image" src="" alt="Article Header" class="w-full h-64 object-cover">
-                
+
                 <div class="p-8 md:p-12">
                     <span id="modal-category" class="text-xs font-bold text-gold uppercase tracking-wide">Category</span>
                     <h2 id="modal-title" class="text-3xl font-heading font-bold text-deepBlue mt-2 mb-6">Article Title</h2>
                     <div id="modal-body" class="prose max-w-none text-gray-600 space-y-4">
                         </div>
-                    
+
                     <div class="mt-8 pt-8 border-t border-gray-100 flex justify-between items-center">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-deepBlue">
@@ -488,21 +537,27 @@
 
     <script>
         // --- 1. Mobile Menu Functionality ---
-        const mobileMenu = document.getElementById('mobile-menu-overlay');
-        let isMenuOpen = false;
+// --- 1. Mobile Menu & Hamburger Animation ---
+const mobileMenu = document.getElementById('mobile-menu-overlay');
+const hamburgerBtn = document.getElementById('hamburger-btn');
+let isMenuOpen = false;
 
-        function toggleMobileMenu() {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                // Slide Down
-                mobileMenu.classList.remove('-translate-y-[150%]');
-                mobileMenu.classList.add('translate-y-[60px]'); // Adjust based on navbar height
-            } else {
-                // Slide Up
-                mobileMenu.classList.add('-translate-y-[150%]');
-                mobileMenu.classList.remove('translate-y-[60px]');
-            }
-        }
+function toggleMobileMenu() {
+    isMenuOpen = !isMenuOpen;
+    
+    // Toggle Animation Class on Button (This makes the X appear)
+    if (isMenuOpen) {
+        hamburgerBtn.classList.add('open');
+        // Slide Down
+        mobileMenu.classList.remove('-translate-y-[150%]');
+        mobileMenu.classList.add('translate-y-[60px]');
+    } else {
+        hamburgerBtn.classList.remove('open');
+        // Slide Up
+        mobileMenu.classList.add('-translate-y-[150%]');
+        mobileMenu.classList.remove('translate-y-[60px]');
+    }
+}
 
         // --- 2. Article Data & Modal Logic ---
         const articles = {
